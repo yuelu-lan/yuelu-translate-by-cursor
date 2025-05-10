@@ -1,5 +1,5 @@
 {
-  "name": "yuelu-translate",
+  "name": "yuelu-translate-by-cursor",
   "displayName": "月鹿翻译",
   "description": "-",
   "version": "0.0.1",
@@ -20,6 +20,14 @@
       {
         "command": "yuelu-translate.translateToEnglish",
         "title": "翻译为英语"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "yuelu-translate.translateToEnglish",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "editorTextFocus"
       }
     ]
   },
