@@ -1,71 +1,49 @@
-# helloworld-yuelu1234 README
+# 月鹿翻译
 
-This is the README for your extension "helloworld-yuelu1234". After writing up a brief description, we recommend including the following sections.
+月鹿翻译是一个简单易用的 Visual Studio Code 翻译扩展，帮助开发者进行代码注释和文档的快速翻译。
 
-## Features
+## 功能特性
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- 选中文本一键翻译为英语
+- 支持代码文件中的注释翻译
+- 简洁的用户界面，轻量且高效
 
-For example if there is an image subfolder under your extension project workspace:
+## 使用方法
 
-\!\[feature X\]\(images/feature-x.png\)
+1. 在编辑器中选中需要翻译的文本内容
+2. 右键点击选中内容，在上下文菜单中选择"翻译为英语"
+3. 或者使用快捷键（待配置）触发翻译功能
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## 系统要求
 
-## Requirements
+- Visual Studio Code 1.100.0 或更高版本
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## 扩展设置
 
-## Extension Settings
+此扩展程序暂未提供特定设置选项，未来版本会增加自定义翻译参数等功能。
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## 已知问题
 
-For example:
+- 目前翻译功能仍在开发中
 
-This extension contributes the following settings:
+## 版本记录
 
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
+### 0.0.1
 
-## Known Issues
+- 初始版本
+- 添加基础扩展框架
+- 实现扩展命令注册
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+## 关于开发者
 
-## Release Notes
+月鹿翻译由 AI 爱好者开发，旨在提高多语言环境下的开发效率。
 
-Users appreciate release notes as you update your extension.
+## 未来计划
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+- 增加更多语言支持
+- 添加批量翻译功能
+- 优化翻译质量
 
 ---
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+**祝您使用愉快!**
