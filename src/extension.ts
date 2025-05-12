@@ -1,6 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { OpenAITranslator } from './services/openaiTranslator';
+import { TranslationResultView } from './ui/translationResultView';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -10,6 +12,9 @@ export function activate(context: vscode.ExtensionContext) {
   console.log(
     'Congratulations, your extension "yuelu-translate" is now active!',
   );
+
+  // 创建OpenAI翻译器实例
+  const openaiTranslator = new OpenAITranslator();
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
@@ -26,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
   // 注册翻译命令
   const translateCommand = vscode.commands.registerCommand(
     'yuelu-translate.translateToEnglish',
-    () => {
+    async () => {
       // 获取活动编辑器
       const editor = vscode.window.activeTextEditor;
 
@@ -36,12 +41,142 @@ export function activate(context: vscode.ExtensionContext) {
         const text = editor.document.getText(selection);
 
         if (text.length > 0) {
-          // 暂时返回"功能开发中"
-          vscode.window.showInformationMessage('功能开发中');
+          try {
+            // 检查是否已配置API密钥
+            if (!openaiTranslator.isConfigValid()) {
+              const result = await vscode.window.showWarningMessage(
+                '请先配置OpenAI API密钥',
+                '立即配置',
+              );
+
+              if (result === '立即配置') {
+                vscode.commands.executeCommand(
+                  'yuelu-translate.configureOpenAI',
+                );
+              }
+              return;
+            }
+
+            // 显示进度条
+            await vscode.window.withProgress(
+              {
+                location: vscode.ProgressLocation.Notification,
+                title: '正在翻译...',
+                cancellable: false,
+              },
+              async (progress) => {
+                try {
+                  // 调用OpenAI API进行翻译
+                  const translationResult =
+                    await openaiTranslator.translateToEnglish(text);
+
+                  // 显示翻译结果
+                  TranslationResultView.show(
+                    text,
+                    translationResult.text,
+                    translationResult.fromCache,
+                  );
+
+                  // 如果结果来自缓存，显示提示
+                  if (translationResult.fromCache) {
+                    progress.report({ message: '从缓存中获取翻译结果' });
+                  }
+                } catch (error) {
+                  if (error instanceof Error) {
+                    vscode.window.showErrorMessage(error.message);
+                  } else {
+                    vscode.window.showErrorMessage('翻译过程中发生未知错误');
+                  }
+                }
+              },
+            );
+          } catch (error) {
+            if (error instanceof Error) {
+              vscode.window.showErrorMessage(error.message);
+            } else {
+              vscode.window.showErrorMessage('翻译过程中发生未知错误');
+            }
+          }
         } else {
           vscode.window.showWarningMessage('请先选择要翻译的文本');
         }
       }
+    },
+  );
+
+  // 注册配置OpenAI命令
+  const configureOpenAICommand = vscode.commands.registerCommand(
+    'yuelu-translate.configureOpenAI',
+    async () => {
+      // 获取当前配置
+      const configuration = vscode.workspace.getConfiguration(
+        'yuelu-translate.openai',
+      );
+
+      // 获取API密钥
+      const apiKey = await vscode.window.showInputBox({
+        prompt: '请输入OpenAI API密钥',
+        password: true,
+        value: configuration.get<string>('apiKey', ''),
+      });
+
+      if (apiKey !== undefined) {
+        await configuration.update(
+          'apiKey',
+          apiKey,
+          vscode.ConfigurationTarget.Global,
+        );
+      } else {
+        return; // 用户取消了输入
+      }
+
+      // 获取基础URL
+      const baseURL = await vscode.window.showInputBox({
+        prompt: '请输入OpenAI API基础URL (可选)',
+        value: configuration.get<string>(
+          'baseURL',
+          'https://api.openai.com/v1',
+        ),
+      });
+
+      if (baseURL !== undefined) {
+        await configuration.update(
+          'baseURL',
+          baseURL,
+          vscode.ConfigurationTarget.Global,
+        );
+      } else {
+        return; // 用户取消了输入
+      }
+
+      // 获取模型
+      const models = ['gpt-3.5-turbo', 'gpt-4', 'gpt-4-turbo'];
+      const model = await vscode.window.showQuickPick(models, {
+        placeHolder: '请选择OpenAI模型',
+        canPickMany: false,
+      });
+
+      if (model) {
+        await configuration.update(
+          'model',
+          model,
+          vscode.ConfigurationTarget.Global,
+        );
+      }
+
+      // 更新翻译器配置
+      openaiTranslator.updateConfig();
+
+      vscode.window.showInformationMessage('OpenAI配置已更新');
+    },
+  );
+
+  // 注册清除翻译缓存命令
+  const clearCacheCommand = vscode.commands.registerCommand(
+    'yuelu-translate.clearTranslationCache',
+    () => {
+      openaiTranslator.clearCache();
+      vscode.window.showInformationMessage('翻译缓存已清除');
     },
   );
 
@@ -193,6 +328,8 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(disposable);
   context.subscriptions.push(translateCommand);
   context.subscriptions.push(changeCaseCommand);
+  context.subscriptions.push(configureOpenAICommand);
+  context.subscriptions.push(clearCacheCommand);
 }
 
 // This method is called when your extension is deactivated

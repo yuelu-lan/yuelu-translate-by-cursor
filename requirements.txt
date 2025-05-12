@@ -1,0 +1,18 @@
+请实现 OpenAI 翻译功能
+1. 需要用户配置 apiKey,baseURL,model 三个参数
+2. 默认将中文翻译为英文
+3. 将翻译后的内容使用你认为合适的方案，展示给用户
+4. 请注意代码结构，后续还会有其他的翻译方案
+
+apiKey: sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi
+baseURL: 
+
+请先使用 angular 的 git 方案，提交当前代码。
+然后完成以下操作：
+1. 配置项 model 改为非枚举，用户可自由配置
+2. 本地调试时，使用以下默认配置:
+apiKey: sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi
+baseURL: https://api.siliconflow.cn/v1
+model: THUDM/GLM-4-9B-0414
+3. 移除 axios 库
+完成后提交代码。
