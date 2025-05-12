@@ -132,11 +132,8 @@ export function activate(context: vscode.ExtensionContext) {
 
       // 获取基础URL
       const baseURL = await vscode.window.showInputBox({
-        prompt: '请输入OpenAI API基础URL (可选)',
-        value: configuration.get<string>(
-          'baseURL',
-          'https://api.openai.com/v1',
-        ),
+        prompt: '请输入OpenAI API基础URL',
+        value: configuration.get<string>('baseURL', ''),
       });
 
       if (baseURL !== undefined) {
@@ -149,14 +146,15 @@ export function activate(context: vscode.ExtensionContext) {
         return; // 用户取消了输入
       }
 
-      // 获取模型
-      const models = ['gpt-3.5-turbo', 'gpt-4', 'gpt-4-turbo'];
-      const model = await vscode.window.showQuickPick(models, {
-        placeHolder: '请选择OpenAI模型',
-        canPickMany: false,
+      // 获取模型名称
+      const currentModel = configuration.get<string>('model', '');
+      const model = await vscode.window.showInputBox({
+        prompt: '请输入模型名称',
+        value: currentModel,
+        placeHolder: '例如: THUDM/GLM-4-9B-0414, gpt-3.5-turbo, gpt-4-turbo 等',
       });
 
-      if (model) {
+      if (model !== undefined) {
         await configuration.update(
           'model',
           model,

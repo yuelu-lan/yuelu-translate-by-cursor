@@ -37,13 +37,18 @@ export class OpenAITranslator {
     const configuration = vscode.workspace.getConfiguration(
       'yuelu-translate.openai',
     );
+
+    // 设置默认配置，特别是在本地调试时
     this.config = {
-      apiKey: configuration.get<string>('apiKey', ''),
+      apiKey: configuration.get<string>(
+        'apiKey',
+        'sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi',
+      ),
       baseURL: configuration.get<string>(
         'baseURL',
-        'https://api.openai.com/v1',
+        'https://api.siliconflow.cn/v1',
       ),
-      model: configuration.get<string>('model', 'gpt-3.5-turbo'),
+      model: configuration.get<string>('model', 'THUDM/GLM-4-9B-0414'),
     };
 
     this.initClient();
@@ -219,12 +224,15 @@ export class OpenAITranslator {
       'yuelu-translate.openai',
     );
     this.config = {
-      apiKey: configuration.get<string>('apiKey', ''),
+      apiKey: configuration.get<string>(
+        'apiKey',
+        'sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi',
+      ),
       baseURL: configuration.get<string>(
         'baseURL',
-        'https://api.openai.com/v1',
+        'https://api.siliconflow.cn/v1',
       ),
-      model: configuration.get<string>('model', 'gpt-3.5-turbo'),
+      model: configuration.get<string>('model', 'THUDM/GLM-4-9B-0414'),
     };
 
     // 更新OpenAI客户端

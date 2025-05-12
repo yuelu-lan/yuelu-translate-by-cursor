@@ -53,23 +53,18 @@
       "properties": {
         "yuelu-translate.openai.apiKey": {
           "type": "string",
-          "default": "",
+          "default": "sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi",
           "description": "OpenAI API 密钥"
         },
         "yuelu-translate.openai.baseURL": {
           "type": "string",
-          "default": "https://api.openai.com/v1",
+          "default": "https://api.siliconflow.cn/v1",
           "description": "OpenAI API 基础URL"
         },
         "yuelu-translate.openai.model": {
           "type": "string",
-          "default": "gpt-3.5-turbo",
-          "enum": [
-            "gpt-3.5-turbo",
-            "gpt-4",
-            "gpt-4-turbo"
-          ],
-          "description": "OpenAI 模型"
+          "default": "THUDM/GLM-4-9B-0414",
+          "description": "OpenAI 模型，可自由配置模型名称"
         }
       }
     }
@@ -94,9 +89,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@types/axios": "^0.14.4",
     "@types/change-case": "^2.3.5",
-    "axios": "^1.9.0",
     "change-case": "^5.4.4",
     "openai": "^4.98.0"
   }
