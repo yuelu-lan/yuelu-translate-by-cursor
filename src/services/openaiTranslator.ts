@@ -1,6 +1,13 @@
 import OpenAI from 'openai';
 import * as vscode from 'vscode';
 
+function getEnv(key: string, fallback: string = ''): string {
+  if (typeof process !== 'undefined' && process.env && process.env[key]) {
+    return process.env[key] as string;
+  }
+  return fallback;
+}
+
 export interface OpenAIConfig {
   apiKey: string;
   baseURL: string;
@@ -37,20 +44,21 @@ export class OpenAITranslator {
     const configuration = vscode.workspace.getConfiguration(
       'yuelu-translate.openai',
     );
-
-    // 设置默认配置，特别是在本地调试时
+    // 优先级：配置 > 环境变量 > 硬编码默认值
     this.config = {
       apiKey: configuration.get<string>(
         'apiKey',
-        'sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi',
+        getEnv('YUELU_TRANSLATE_OPENAI_API_KEY'),
       ),
       baseURL: configuration.get<string>(
         'baseURL',
-        'https://api.siliconflow.cn/v1',
+        getEnv('YUELU_TRANSLATE_OPENAI_BASE_URL'),
       ),
-      model: configuration.get<string>('model', 'THUDM/GLM-4-9B-0414'),
+      model: configuration.get<string>(
+        'model',
+        getEnv('YUELU_TRANSLATE_OPENAI_MODEL'),
+      ),
     };
-
     this.initClient();
   }
 
@@ -226,15 +234,17 @@ export class OpenAITranslator {
     this.config = {
       apiKey: configuration.get<string>(
         'apiKey',
-        'sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi',
+        getEnv('YUELU_TRANSLATE_OPENAI_API_KEY'),
       ),
       baseURL: configuration.get<string>(
         'baseURL',
-        'https://api.siliconflow.cn/v1',
+        getEnv('YUELU_TRANSLATE_OPENAI_BASE_URL'),
       ),
-      model: configuration.get<string>('model', 'THUDM/GLM-4-9B-0414'),
+      model: configuration.get<string>(
+        'model',
+        getEnv('YUELU_TRANSLATE_OPENAI_MODEL'),
+      ),
     };
-
     // 更新OpenAI客户端
     this.initClient();
   }

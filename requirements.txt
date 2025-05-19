@@ -4,9 +4,6 @@
 3. 将翻译后的内容使用你认为合适的方案，展示给用户
 4. 请注意代码结构，后续还会有其他的翻译方案
 
-apiKey: sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi
-baseURL: 
-
 请先使用 angular 的 git 方案，提交当前代码。
 然后完成以下操作：
 1. 配置项 model 改为非枚举，用户可自由配置
