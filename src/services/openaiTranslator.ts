@@ -44,7 +44,6 @@ export class OpenAITranslator {
     const configuration = vscode.workspace.getConfiguration(
       'yuelu-translate.openai',
     );
-    // 优先级：配置 > 环境变量 > 硬编码默认值
     this.config = {
       apiKey: configuration.get<string>(
         'apiKey',

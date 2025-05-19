@@ -23,28 +23,11 @@ export function activate(context: vscode.ExtensionContext) {
   // 创建OpenAI翻译器实例
   const openaiTranslator = new OpenAITranslator();
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  // const disposable = vscode.commands.registerCommand(
-  //   'yuelu-translate.helloWorld',
-  //   () => {
-  //     // The code you place here will be executed every time your command is executed
-  //     // Display a message box to the user
-  //     vscode.window.showInformationMessage('Hello World from 月鹿翻译!');
-  //   },
-  // );
-  // context.subscriptions.push(disposable);
-
   // 注册翻译相关命令
   registerTranslationCommands(context, openaiTranslator);
 
   // 注册大小写转换相关命令
   registerCaseConversionCommands(context);
-
-  // 移除已迁移的代码
-  // ... (translateCommand, configureOpenAICommand, clearCacheCommand, containsChinese, changeCaseCommand implementations were here)
-  // ... (and their corresponding context.subscriptions.push calls)
 }
 
 // This method is called when your extension is deactivated
