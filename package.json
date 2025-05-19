@@ -14,10 +14,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "yuelu-translate.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "yuelu-translate.translateToEnglish",
         "title": "翻译为英语"
       },
