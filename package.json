@@ -49,17 +49,14 @@
       "properties": {
         "yuelu-translate.openai.apiKey": {
           "type": "string",
-          "default": "sk-unhnucgvfmohtdfjseyetrnioziyhchukdeaggkalzkqwydi",
           "description": "OpenAI API 密钥"
         },
         "yuelu-translate.openai.baseURL": {
           "type": "string",
-          "default": "https://api.siliconflow.cn/v1",
           "description": "OpenAI API 基础URL"
         },
         "yuelu-translate.openai.model": {
           "type": "string",
-          "default": "THUDM/GLM-4-9B-0414",
           "description": "OpenAI 模型，可自由配置模型名称"
         }
       }
@@ -75,19 +72,18 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
+    "@types/node": "~20.17.50",
     "@types/vscode": "^1.100.0",
-    "@typescript-eslint/eslint-plugin": "^8.31.1",
-    "@typescript-eslint/parser": "^8.31.1",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.5.2",
-    "dotenv": "^16.5.0",
-    "eslint": "^9.25.1",
+    "eslint": "^9.27.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@types/change-case": "^2.3.5",
     "change-case": "^5.4.4",
-    "openai": "^4.98.0"
+    "openai": "^4.103.0"
   }
 }

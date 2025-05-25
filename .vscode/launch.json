@@ -3,19 +3,22 @@
 // Hover to view descriptions of existing attributes.
 // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Run Extension",
-			"type": "extensionHost",
-			"request": "launch",
-			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}"
-			],
-			"outFiles": [
-				"${workspaceFolder}/out/**/*.js"
-			],
-			"preLaunchTask": "${defaultBuildTask}"
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      // 添加这一行来加载 .env 文件
+      "envFile": "${workspaceFolder}/.env.local", // 指向你的 .env 文件路径
+      // 或者如果你有多个文件，可以是一个数组
+      // "envFile": [
+      //     "${workspaceFolder}/.env",
+      //     "${workspaceFolder}/.env.development"
+      // ],
+      "preLaunchTask": "${defaultBuildTask}"
+    }
+  ]
 }

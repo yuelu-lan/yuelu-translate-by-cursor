@@ -29,4 +29,7 @@ pnpm-debug.log*
 pnpm-lock.yaml
 
 # 环境变量
-dev.env
+.env.local
+
+# other
+env-test.js

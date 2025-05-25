@@ -45,18 +45,15 @@ export class OpenAITranslator {
       'yuelu-translate.openai',
     );
     this.config = {
-      apiKey: configuration.get<string>(
-        'apiKey',
+      apiKey:
+        configuration.get<string>('apiKey') ||
         getEnv('YUELU_TRANSLATE_OPENAI_API_KEY'),
-      ),
-      baseURL: configuration.get<string>(
-        'baseURL',
+      baseURL:
+        configuration.get<string>('baseURL') ||
         getEnv('YUELU_TRANSLATE_OPENAI_BASE_URL'),
-      ),
-      model: configuration.get<string>(
-        'model',
+      model:
+        configuration.get<string>('model') ||
         getEnv('YUELU_TRANSLATE_OPENAI_MODEL'),
-      ),
     };
     this.initClient();
   }
@@ -231,18 +228,15 @@ export class OpenAITranslator {
       'yuelu-translate.openai',
     );
     this.config = {
-      apiKey: configuration.get<string>(
-        'apiKey',
+      apiKey:
+        configuration.get<string>('apiKey') ||
         getEnv('YUELU_TRANSLATE_OPENAI_API_KEY'),
-      ),
-      baseURL: configuration.get<string>(
-        'baseURL',
+      baseURL:
+        configuration.get<string>('baseURL') ||
         getEnv('YUELU_TRANSLATE_OPENAI_BASE_URL'),
-      ),
-      model: configuration.get<string>(
-        'model',
+      model:
+        configuration.get<string>('model') ||
         getEnv('YUELU_TRANSLATE_OPENAI_MODEL'),
-      ),
     };
     // 更新OpenAI客户端
     this.initClient();
